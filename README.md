@@ -5,7 +5,7 @@ Project 1 for the course COMP4010 - Data Visualization
 |Name   |Student ID   |E-mail   |
 |-------|-------------|---------|
 |Hoang Trung Thanh   |V202100516   |21thanh.ht@vinuni.edu.vn   |
-|Tran Tue Nhi   |V202000079   |nhitran.works@gmail.com   |
+|Tran Tue Nhi   |V202000079   |20nhi.tt@vinuni.edu.vn  |
 |Nguyen Minh Tuan   |V202000254   |20tuan.nm@vinuni.edu.vn   |
 
 ## Dataset chosen and reason to choose
