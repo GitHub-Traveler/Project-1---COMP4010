@@ -26,7 +26,7 @@ The relevant dimension in the datasets are:
 ## Two questions to be answered:
 - What are the patterns and comparisons in electricity generation among the top 5 countries by energy consumption/electricity generation/GDP and globally in 2023? How do these patterns differ between developed and developing countries or across continents?
   
-- Construct a comparative analysis of Vietnam's electricity generation over the last decade, including its evolution and scale relative to the local region and global averages. Opt for a visualization that contrasts Vietnam's energy source distribution with regional and worldwide benchmarks, providing insight into its energy generation trends and positioning
+- How has Vietnam's energy generation evolved over the past decade, particularly in terms of renewable versus non-renewable sources? How does Vietnam's energy consumption and efficiency compare to regional and global averages?
 
 ## Plans for answering each question
 **Question 1**: To answer this, we will utilize stacked bar charts to illustrate the composition of electricity generation for each country. Additionally, countries will be categorized as developed or developing and grouped by continent to provide richer comparative insights.
