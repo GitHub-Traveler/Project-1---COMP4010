@@ -2,15 +2,15 @@
 Project 1 for the course COMP4010 - Data Visualization
 
 ## Group member
-|Name   |Student ID   |E-mail   |
-|-------|-------------|---------|
-|Hoang Trung Thanh   |V202100516   |21thanh.ht@vinuni.edu.vn   |
-|Tran Tue Nhi   |V202000079   |20nhi.tt@vinuni.edu.vn  |
-|Nguyen Minh Tuan   |V202000254   |20tuan.nm@vinuni.edu.vn   |
+|Name   |Student ID   |E-mail   |Title   |
+|-------|-------------|---------|---------|
+|Hoang Trung Thanh   |V202100516   |21thanh.ht@vinuni.edu.vn   |Project Manager|
+|Tran Tue Nhi   |V202000079   |20nhi.tt@vinuni.edu.vn  |Data Analyst|
+|Nguyen Minh Tuan   |V202000254   |20tuan.nm@vinuni.edu.vn   |Data Analyst|
 
 ## Dataset chosen and reason to choose
 
-We choose the dataset (2023-06-06 - Energy Data) for the first project. We choose this dataset as it has a wide range of data, and the correlation between features in the dataset is very intriguing to investigate. Furthermore, this is extremely relevant to the current global landscape, where energy consumption as well as emissions are highly concerned with by many people and instituions, as well as governments.
+We choose the dataset (2023-06-06 - Energy Data) for the first project. We chose this dataset as it has a wide range of data, and the correlation between features in the dataset is very intriguing to investigate. Furthermore, this is extremely relevant to the current global landscape, focused on energy consumption, emissions, and their implications by individuals, institutions, and governments worldwide.
 
 ## Brief introduction and dimensions of the dataset
 
@@ -24,13 +24,11 @@ The relevant dimension in the datasets are:
 - Biofuel/Coal/Fossil Fuel/gas/Hydro/Low Carbon/Nuclear/Oil/Solar/Wind etc. -> share of energy consumption/electricity generation/per capita generation/ etc. : Data on specific type of energy on specific metric.
 
 ## Two questions to be answered:
-- What is the **scale** and **structure** of electricity generation of the 5 countries with the highest **(energy consumption/electricity generation/gdp)** and the world (Possibly in year 2023) ?
-- What is the **scale** and **structure** of Vietnam's electricity generation over the past decade in energy generation ?
+- What are the patterns and comparisons in electricity generation among the top 5 countries by energy consumption/electricity generation/GDP and globally in 2023? How do these patterns differ between developed and developing countries or across continents?
+  
+- Construct a comparative analysis of Vietnam's electricity generation over the last decade, including its evolution and scale relative to the local region and global averages. Opt for a visualization that contrasts Vietnam's energy source distribution with regional and worldwide benchmarks, providing insight into its energy generation trends and positioning
 
 ## Plans for answering each question
-**Question 1**: The variables included in the dataset are: Country, GDP, Total Energy Consumption/Generation and percentage of energy generation for each type electricity generation. We will likely create a stacked bar chart for each country. If we plan to create a chart for a specific year (2023), then we will take the statistics of that year, or else we will create a new column which averages over the past decade for each country.
+**Question 1**: To answer this, we will utilize stacked bar charts to illustrate the composition of electricity generation for each country. Additionally, countries will be categorized as developed or developing and grouped by continent to provide richer comparative insights.
 
-**Question 2**: The variables included in the dataset are: Country, Year, Total Energy Consumption/Generation and percentage of energy generation for each type electricity generation.
-We have two plans for this:
-- 1. Create a stacked bar chart for each year's electrical generation, in which each strip is a type of electricity generation.
-- 2. Create a stacked bar chart/clustered column chart for each year's electrical generation in renewable versus non-renewable energy used in electrical generation. This will require us to create a new column in which the total non-renewable and renewable energy generation will be calculated as the sum of all renewable/non-renewable energy source used.
+**Question 2**: To answer this, we will create line charts to show the trend of renewable versus non-renewable energy generation over time, offering a clear visual representation of shifts in energy sourcing. Furthermore, Vietnam's data will be contextualized with regional and global averages, enhancing the meaningfulness of the findings through data analysis.
