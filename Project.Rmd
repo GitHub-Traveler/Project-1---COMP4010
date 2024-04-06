@@ -1,0 +1,10 @@
+```{r}
+df <- read.csv("owid-energy.csv")
+```
+
+## Question 1
+
+```{r}
+df_2023 = df[!is.na(df$gdp) & df$country == "China", ]
+df_2023
+```
