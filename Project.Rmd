@@ -1,7 +1,21 @@
+---
+title: "Project Report"
+output:
+  pdf_document: default
+  html: default
+date: "2024-03-29"
+---
+
 ```{r}
 library(ggplot2)
 library(tidyverse)
 library(dplyr)
+```
+
+```{r}
+library(showtext)
+font_add_google("Open Sans", "Open Sans")
+showtext_auto()
 ```
 
 ```{r}
@@ -13,11 +27,11 @@ df <- read.csv("data/owid-energy.csv")
 ```{r}
 df_2021 = df[df$year == 2021, ]
 
-df_2021_top_5 <- df_2021[df_2021$country == "China" | df_2018$country == "India" | df_2018$country == "United States" | df_2018$country == "Japan" | df_2018$country == "Germany", ]
+df_2021_top_5 <- df_2021[df_2021$country == "China" | df_2021$country == "India" | df_2021$country == "United States" | df_2021$country == "Japan" | df_2021$country == "Germany", ]
 ```
 
 ```{r}
-df_2021_top_5_important_metric <- df_2018_top_5[,c("country", "population", "gdp", "biofuel_share_elec",  "coal_share_elec", "fossil_share_elec", "gas_share_elec", "hydro_share_elec", "low_carbon_share_elec", "nuclear_share_elec", "oil_share_elec", "other_renewables_share_elec", "renewables_share_elec", "solar_share_elec", "wind_share_elec")]
+df_2021_top_5_important_metric <- df_2021_top_5[,c("country", "population", "gdp", "biofuel_share_elec",  "coal_share_elec", "fossil_share_elec", "gas_share_elec", "hydro_share_elec", "low_carbon_share_elec", "nuclear_share_elec", "oil_share_elec", "other_renewables_share_elec", "renewables_share_elec", "solar_share_elec", "wind_share_elec")]
 ```
 
 ```{r}
@@ -40,7 +54,27 @@ df_2021_top_5_important_metric <- pivot_longer(df_2021_top_5_important_metric, c
 
 ```{r}
 ggplot(df_2021_top_5_important_metric, aes(fill=eletric_share_type, y=percentage, x=country)) + 
-  geom_bar(position="fill", stat="identity") +
+  geom_bar(position="fill", stat="identity", color = "black") +
   scale_fill_viridis_d(option = "turbo") +
-  labs(title = "Eletricity generation constitution of 5 most highest GDP in 2018", x = "Country", y = "Percentage", fill = "Type of eletricity generation")
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = "Eletricity generation constitution of 5 most highest GDP in 2021", x = "Country", y = "Share of total generation", fill = "Type of eletricity generation")
 ```
+
+```{r}
+df_2021_categorize <- df_2021[df_2021$country == "High-income countries" | df_2021$country == "Low-income countries" | df_2021$country == "Lower-middle-income countries" | df_2021$country == "Upper-middle-income countries", ]
+
+```
+
+```{r fig.height = 10, fig.width = 10}
+df_2021_categorize_important_metric <- pivot_longer(df_2021_categorize, cols = c("biofuel_share_elec", "coal_share_elec", "gas_share_elec", "hydro_share_elec", "nuclear_share_elec", "oil_share_elec", "solar_share_elec", "wind_share_elec"), names_to = "eletric_share_type", values_to = "percentage")
+
+ggplot(df_2021_categorize_important_metric, aes(x = "", y=percentage, fill=eletric_share_type)) +geom_bar(width = 1, stat = "identity", color = "black") +
+  scale_fill_viridis_d(option = "turbo") +
+  facet_wrap(.~ country,  nrow = 2) +
+  theme_void() +
+  theme(legend.position = "bottom", plot.title = element_text(hjust = .5), text=element_text(face="bold", size=15), strip.text = element_text(size = 20, color = "red")) +
+  coord_polar("y", start=0) + 
+  labs(title = "Eletricity generation constitution of countries categorized by income in 2023", fill = "Eletricity generation type")
+```
+
+## Question 2
