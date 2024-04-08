@@ -24,11 +24,21 @@ df <- read.csv("data/owid-energy.csv")
 
 ## Question 1
 
+-   **Question**: What are the patterns and comparisons in electricity generation among the top 5 countries by energy consumption/electricity generation/GDP and globally in 2023? How do these patterns differ between developed and developing countries or across continents?
+
+We intended to answer the question for year 2023, as 2023 is thought to be the most recent year which have available data for patterns of electricity generation for each country. In this question, we primary needs the data about the share of each type of electricity generation in a country, which is encoded as "x_share_elec" in the table. We want to answer the above question because it can give us insights about what is the different between practices in the top countries in GDP, as well as the difference between low-income countries and high-income countries with regard to this problem.
+
+However, due to the lack of data in 2023, we can only answer the question for the most recent year which have available data, which is 2021. As such, we will choose the data in 2021 in this question.
+
+In the first aspect of the question, we will plot the constitution of energy generation of 5 countries with the highest GDP worldwide. However, due to our lack of information about GDP in the dataset, we have to get 5 countries in the Internet. From our research, 5 countries with the highest GDP are China, the US, India, Japan and Germany.
+
 ```{r}
 df_2021 = df[df$year == 2021, ]
 
 df_2021_top_5 <- df_2021[df_2021$country == "China" | df_2021$country == "India" | df_2021$country == "United States" | df_2021$country == "Japan" | df_2021$country == "Germany", ]
 ```
+
+From that, we will obtain the important metrics for each country, which are the share of each type of electricity generation.
 
 ```{r}
 df_2021_top_5_important_metric <- df_2021_top_5[,c("country", "population", "gdp", "biofuel_share_elec",  "coal_share_elec", "fossil_share_elec", "gas_share_elec", "hydro_share_elec", "low_carbon_share_elec", "nuclear_share_elec", "oil_share_elec", "other_renewables_share_elec", "renewables_share_elec", "solar_share_elec", "wind_share_elec")]
@@ -37,6 +47,8 @@ df_2021_top_5_important_metric <- df_2021_top_5[,c("country", "population", "gdp
 ```{r}
 df_2021_top_5_important_metric
 ```
+
+However, entries such as "renewables_share_elec" can be overlapping with other types of eletricity generation, so we hypothesize that the electricity generation types which are the most common are: Biofuel, Coal, Gas, Hydro, Nuclear, Oil, Solar and Wind. We test if our assumption is right by add them together.
 
 ```{r}
 df_2021_top_5_important_metric$total = df_2021_top_5_important_metric$biofuel_share_elec + df_2021_top_5_important_metric$coal_share_elec + 
@@ -48,17 +60,26 @@ df_2021_top_5_important_metric$solar_share_elec +
 df_2021_top_5_important_metric$wind_share_elec
 ```
 
+We see that, the results are approximately 100%, so other kinds of electricity generation is there, but not too much.
+
 ```{r}
 df_2021_top_5_important_metric <- pivot_longer(df_2021_top_5_important_metric, cols = c("biofuel_share_elec", "coal_share_elec", "gas_share_elec", "hydro_share_elec", "nuclear_share_elec", "oil_share_elec", "solar_share_elec", "wind_share_elec"), names_to = "eletric_share_type", values_to = "percentage")
 ```
+
+In this question, to illustrate the constitution of 5 highest GDP countries, we will use the percent stacked bar chart.
 
 ```{r}
 ggplot(df_2021_top_5_important_metric, aes(fill=eletric_share_type, y=percentage, x=country)) + 
   geom_bar(position="fill", stat="identity", color = "black") +
   scale_fill_viridis_d(option = "turbo") +
+  theme(legend.position = "bottom") +
   scale_y_continuous(labels = scales::percent) +
   labs(title = "Eletricity generation constitution of 5 most highest GDP in 2021", x = "Country", y = "Share of total generation", fill = "Type of eletricity generation")
 ```
+
+We can see that, there is a wide difference between the constitution of electricity generation in 5 countries above, for example, China and India tends to use more coal as the means of generating electricity, whereas Japan and the US favor gas as the main resource for electricity generation. Overall, we cannot tell a general trend from just the graph above. We need more information.
+
+We suppose that the electrical generation constitution of a country correlates with the development stage of a country. We try to plot 4 pie charts corresponding to: High-income countries, Low-income countries, Lower-middle-income countries, Higher-middle-income countries to see if there is some correlation between 5 countries above and the pie charts generated.
 
 ```{r}
 df_2021_categorize <- df_2021[df_2021$country == "High-income countries" | df_2021$country == "Low-income countries" | df_2021$country == "Lower-middle-income countries" | df_2021$country == "Upper-middle-income countries", ]
@@ -71,10 +92,15 @@ df_2021_categorize_important_metric <- pivot_longer(df_2021_categorize, cols = c
 ggplot(df_2021_categorize_important_metric, aes(x = "", y=percentage, fill=eletric_share_type)) +geom_bar(width = 1, stat = "identity", color = "black") +
   scale_fill_viridis_d(option = "turbo") +
   facet_wrap(.~ country,  nrow = 2) +
-  theme_void() +
   theme(legend.position = "bottom", plot.title = element_text(hjust = .5), text=element_text(face="bold", size=15), strip.text = element_text(size = 20, color = "red")) +
   coord_polar("y", start=0) + 
   labs(title = "Eletricity generation constitution of countries categorized by income in 2023", fill = "Eletricity generation type")
 ```
+
+### Discussion
+
+-   We can see that there is little correlation between 5 top countries regarding to GDP. Each have its own energy constitution distinct from each other.
+
+-   However, there is a significant correlation between the electricity consumption
 
 ## Question 2
