@@ -1,5 +1,5 @@
 ---
-title: "Project Report"
+title: "Question 1 - RMD"
 output:
   pdf_document: default
   html: default
@@ -102,5 +102,3 @@ ggplot(df_2021_categorize_important_metric, aes(x = "", y=percentage, fill=eletr
 -   We can see that there is little correlation between 5 top countries regarding to GDP. Each have its own energy constitution distinct from each other.
 
 -   However, there is a significant correlation between the electricity consumption
-
-## Question 2
