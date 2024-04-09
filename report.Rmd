@@ -37,7 +37,7 @@ showtext_auto()
 ```
 
 ```{r}
-df <- read.csv("data/owid-energy.csv")
+df <- read.csv("owid-energy.csv")
 ```
 
 ## Question 1
@@ -124,3 +124,65 @@ ggplot(df_2021_categorize_important_metric, aes(x = "", y=percentage, fill=eletr
 -   From that results, we can postulate that the electricity generation constitution mostly depends on the development stage of that country, in which one of the criteria is the GDP per capita. More research is needed, although.
 
 ## Question 2
+
+-   **Question**: How has Vietnam's energy generation evolved over the past decade, particularly in terms of renewable versus non-renewable sources? How does Vietnam's energy consumption and efficiency compare to regional and global averages?
+
+To answer this question, we intend to utilize an animated Treemap that aims to succinctly visualize the evolution of Vietnam's energy generation over the past decade, highlighting the shift from non-renewable to renewable sources alongside global averages. By representing four key data points—Vietnam's fossil and renewable energy, and the global averages for each—this visualization provides a clear comparison of Vietnam's energy transition and its standing on the global stage. This efficient and engaging approach offers insights into Vietnam's progress and challenges in adopting sustainable energy, facilitating a better understanding of its energy dynamics in relation to worldwide trends.
+
+In the dataset, we already have the fossil electricity and renewable electricity data in Vietnam. However, we don't have the global averages of the aforementioned data. Therefore, we have to write a Python script to calculate those data. Moreover, as this data contains so much noise and null data, we have to preprocess the data using a Python script, which is already committed to our GitHub repo.
+
+Importantly, instead of solving this question using R, I have discussed it with Professor Dung and got his approval to use other programming languages to tackle this problem. This question is visualized using Javascript, D3.js, and a cloud service provider called Observable. The link to our Observable workspace is here: <https://observablehq.com/d/72ba4dd430929194>
+
+### Data Preprocessing:
+
+To successfully produce an animated Treemap, we have to preprocess the data first. Here are the steps that we employ to clean our data:
+
+-   Import CSV file
+-   Calculate average values of global renewable and fossil electricity for each year
+-   Remove all the data fields, except the Vietnam renewable electricity, Vietnam fossil electricity, global renewable & fossil electricity
+-   Filter the year from 1985 to 2021.
+-   Transpose columns to rows
+-   Put all values in a quote
+-   Return data in TSV format
+
+### Data Labeling:
+
+An important aspect of Treemap is that we have to label the regions for the data that is visualized. Each different region will have a different color on our chart. Since the regions in Q2 are not many, we decided to manually label them.
+
+### Analysis:
+
+Observable notebook: <https://observablehq.com/d/72ba4dd430929194>
+
+The source code is in the notebook above. In this section, I only go through the implementation result.
+
+The result is a treemap that can represent 4 different data: 
+- Fossil electricity in Vietnam
+- Renewable electricity in Vietnam
+- Global average fossil electricity
+- Global average renewable electricity
+
+There is a button and a slider on the top left of the visualization, which can be used to animate the Treemap. Once that button is hit, the Treemap will animate and grow bigger / smaller to show the changes in energy data through the years
+
+
+ ![Treemap in 2000](/Users/tuannguyen/Desktop/img1.png) 
+
+ ![Treemap in 2000](/Users/tuannguyen/Desktop/img2.png) 
+
+## Discussion:
+
+- Surprisingly, the amount of electricity generated from renewable energy in Vietnam in 2000 was greater than the amount of fossil energy. I didn't know that until I worked on this question. In my opinion, this is because of the large amount of electricity generated from hydro power dams, which is considered renewable.
+
+- Over the course of 20 years, the proportion of fossil electricity in Vietnam gradually increased, which made the portion of renewable electricity decreased. I believe that this was because of the newly built thermal power plant in Vietnam. This contrasts with the global trend, which remains stable from 2000 to 2020. 
+
+- One of the technical issues with the chart is that it can not represent correctly the name of the data region in the year 2000 because the chart is too small. This problem is solved when the timeframe is changed to the year 2020, which makes the chart bigger. This is a native issue of Treemap, so it can be solved by our team. 
+
+## Conclusion:
+
+The analysis highlights distinct electricity generation patterns, showing that the energy mix in the top five countries by consumption is more closely tied to their development stage rather than GDP size. Developed countries like Germany, Japan, and the USA have diversified energy sources including renewables, whereas developing countries such as China and India rely heavily on coal and hydroelectric power. Vietnam's shift from a renewable-heavy mix to more fossil fuels over the past decade contrasts with global trends towards renewables. This suggests a development-induced energy transition, with further research needed on its socio-economic and environmental impacts. Enhanced data visualization techniques could also provide clearer insights into these global and regional energy dynamics.
+
+
+
+
+
+
+
